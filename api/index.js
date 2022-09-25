@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const express = require('express');
-const sequelize = ('./db.js');
+const sequelize = require('./db')
 const PORT = process.env.PORT || 4444;
 const app = express();
 
@@ -10,12 +10,7 @@ const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
-        app.listen(PORT, (err) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log('Nice');
-        });
+        app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
     }
     catch (e) {
         console.log(e);
