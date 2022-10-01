@@ -1,4 +1,4 @@
-const sequelize = require('./db')
+const sequelize = require('../db')
 const { DataTypes } = require('sequelize')
 
 const User = sequelize.define('user', {
@@ -71,7 +71,6 @@ module.exports = {
     Entity,
     Type,
     Position,
-    Rating,
     TypePosition,
     EntityInfo
 }
