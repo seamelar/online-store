@@ -8,7 +8,7 @@ const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const fileUpload = require('express-fileupload')
 const path = require('path')
-/*const models = require('./models/models')*/
+/*const models = require('../models/models')*/
 const cors = require('cors');
 
 app.use(cors())

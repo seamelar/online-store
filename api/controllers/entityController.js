@@ -1,5 +1,5 @@
 const uuid = require('uuid')
-const { Entity } = require('../models/models')
+const { Entity, EntityInfo } = require('../models/models')
 const path = require('path');
 const ApiError = require('../error/ApiError');
 
@@ -12,6 +12,16 @@ class EntityController {
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
             const entity = await Entity.create({ name, price, positionId, typeId, img: fileName });
 
+            if (info) {
+                info = JSON.parse(info)
+                info.forEach(i =>
+                    EntityInfo.create({
+                        title: i.title,
+                        description: i.description,
+                        entityId: entity.id
+                    })
+                )
+            }
             return res.json(entity)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -41,7 +51,14 @@ class EntityController {
     }
 
     async getOne(req, res) {
-
+        const { id } = req.params
+        const entity = await Entity.findOne(
+            {
+                where: { id },
+                include: [{ model: EntityInfo, as: 'info' }]
+            },
+        )
+        return res.json(entity)
     }
 }
 
