@@ -23,10 +23,10 @@ export default class EntityStore {
     setTypes(types) {
         this._types = types
     }
-    setBrands(positions) {
+    setPositions(positions) {
         this._positions = positions
     }
-    setDevices(entities) {
+    setEntities(entities) {
         this._entities = entities
     }
 
